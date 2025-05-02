@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IN FURGO - Protección, diseño y calidad para tu furgoneta</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">IN FURGO</div>
+    <nav class="menu">
+      <a href="#inicio">Inicio</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#blog">Blog</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#contacto">Contacto</a>
+      <a href="javascript:void(0);" onclick="abrirAreaCliente()">Área Cliente</a>
+
+    </nav>
+  </header>
+
+  <!-- Modal de Área Cliente -->
+<div id="modalCliente" class="modal" style="display:none;">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarAreaCliente()">&times;</span>
+    <h2>Área de Cliente</h2>
+
+    <div class="tabs">
+      <button onclick="mostrarFormulario('registro')">Registrarse</button>
+      <button onclick="mostrarFormulario('login')">Iniciar sesión</button>
+    </div>
+
+    <div id="formRegistro" class="formulario">
+      <h3>Crear cuenta</h3>
+      <input type="text" id="nombreRegistro" placeholder="Nombre completo"><br>
+      <input type="email" id="emailRegistro" placeholder="Correo electrónico"><br>
+      <input type="password" id="passwordRegistro" placeholder="Contraseña"><br>
+      <button type="button" onclick="validarRegistro()">Registrarse</button>
+    </div>
+    
+    <div id="formLogin" class="formulario" style="display:none;">
+      <h3>Iniciar sesión</h3>
+      <input type="email" id="emailLogin" placeholder="Correo electrónico"><br>
+      <input type="password" id="passwordLogin" placeholder="Contraseña"><br>
+      <button type="button" onclick="validarLogin()">Entrar</button>
+    </div>
+    
+
+  </div>
+</div>
+
+  <!-- Sección Inicio -->
+  <section id="inicio" class="hero">
+    <h1>Protección, diseño y calidad para tu furgoneta.</h1>
+    <a href="#tienda" class="boton-principal">Descubre nuestros paneles</a>
+  </section>
+
+  <!-- Sección Tienda actualizada -->
+<section id="tienda" class="seccion">
+  <h2>Tienda</h2>
+  <div class="productos">
+
+    <!-- Producto 1 -->
+    <div class="producto">
+      <h3>Panel Furgoneta Modelo A</h3>
+      <p>Referencia: PNL-A123</p>
+      <p>Precio base: 150 €</p>
+      <button onclick="mostrarDetalles('Panel Furgoneta Modelo A', 150)">Ver detalles</button>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="producto">
+      <h3>Panel Furgoneta Modelo B</h3>
+      <p>Referencia: PNL-B456</p>
+      <p>Precio base: 180 €</p>
+      <button onclick="mostrarDetalles('Panel Furgoneta Modelo B', 180)">Ver detalles</button>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="producto">
+      <h3>Panel Furgoneta Modelo C</h3>
+      <p>Referencia: PNL-C789</p>
+      <p>Precio base: 200 €</p>
+      <button onclick="mostrarDetalles('Panel Furgoneta Modelo C', 200)">Ver detalles</button>
+    </div>
+
+    <!-- Producto 4 -->
+    <div class="producto">
+      <h3>Panel Camperizado Modelo D</h3>
+      <p>Referencia: CMP-D012</p>
+      <p>Precio base: 220 €</p>
+      <button onclick="mostrarDetalles('Panel Camperizado Modelo D', 220)">Ver detalles</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Modal oculto inicialmente -->
+<div id="modal" class="modal" style="display:none;">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+    <h2 id="tituloProducto"></h2>
+    <form id="formOpciones">
+      <label><input type="checkbox" value="50"> Laterales (+50€)</label><br>
+      <label><input type="checkbox" value="40"> Puerta trasera (+40€)</label><br>
+      <label><input type="checkbox" value="70"> Piso (+70€)</label><br>
+      <label><input type="checkbox" value="30"> Protector de cubreruedas (+30€)</label><br>
+      <label><input type="checkbox" value="10"> Tornillería (+10€)</label><br><br>
+      <p><strong>Precio total: <span id="precioTotal"></span> €</strong></p>
+    </form>
+  </div>
+</div>
+
+
+  <!-- Sección Blog -->
+  <section id="blog" class="seccion">
+    <h2>Blog</h2>
+    <article class="articulo">
+      <h3>¿Por qué panelar tu furgoneta?</h3>
+      <p>Descubre los beneficios de proteger el interior de tu vehículo con nuestros paneles.</p>
+    </article>
+  </section>
+
+  <!-- Sección Opiniones -->
+  <section id="opiniones" class="seccion">
+    <h2>Opiniones de Clientes</h2>
+    <blockquote>"Servicio excelente y paneles de calidad. ¡Muy recomendables!"</blockquote>
+    <blockquote>"Mi furgoneta parece nueva por dentro. ¡Mil gracias IN FURGO!"</blockquote>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contacto" class="footer">
+    <p>Teléfono: 691 596 915 | Email: pedidos@infurgo.es</p>
+    <p>Síguenos en Instagram: @in_furgo</p>
+  </footer>
+
+
+<!-- Carrito oculto inicialmente -->
+<div id="carrito" class="modal" style="display:none;">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarCarrito()">&times;</span>
+    <h2>Tu Carrito</h2>
+    <ul id="listaCarrito"></ul>
+    <p><strong>Total: <span id="totalCarrito">0</span> €</strong></p>
+    <button onclick="confirmarPedido()">Confirmar pedido</button>
+    <button onclick="pagarConStripe()">Pagar ahora</button>
+
+  </div>
+</div>
+
+<!-- Botón para abrir el carrito -->
+<button id="botonCarrito" onclick="mostrarCarrito()" style="position:fixed; bottom:20px; right:20px; background:#ffd500; border:none; padding:15px; border-radius:50%; font-size:20px; font-weight:bold; cursor:pointer; box-shadow: 0px 0px 10px rgba(0,0,0,0.3);">
+  🛒
+</button>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBjTOrS51tLSPvI4wjC2R-3G2QB_ZRB2CI",
+    authDomain: "infurgo-web.firebaseapp.com",
+    projectId: "infurgo-web",
+    storageBucket: "infurgo-web.firebasestorage.app",
+    messagingSenderId: "310303622159",
+    appId: "1:310303622159:web:64a6b35d5a7ea5332e0f7a"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
+<!-- Firebase Core SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBjTOrS51tLSPvI4wjC2R-3G2QB_ZRB2CI",
+    authDomain: "infurgo-web.firebaseapp.com",
+    projectId: "infurgo-web",
+    storageBucket: "infurgo-web.firebasestorage.app",
+    messagingSenderId: "310303622159",
+    appId: "1:310303622159:web:64a6b35d5a7ea5332e0f7a"
+  };
+
+  // Inicializar Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+<script>
+  const db = firebase.firestore();
+</script>
+
+
+
+
+<!-- Modal de historial de pedidos -->
+<div id="modalHistorial" class="modal" style="display: none;">
+  <div class="modal-contenido">
+    <span class="cerrar" onclick="cerrarHistorialPedidos()">&times;</span>
+    <h2>Mis pedidos</h2>
+    <div id="listaPedidos" style="max-height: 300px; overflow-y: auto;"></div>
+  </div>
+</div>
+
+<!-- Cargar Stripe.js antes que tu script -->
+<script src="https://js.stripe.com/v3/"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>
+
