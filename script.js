@@ -108,6 +108,46 @@ function cerrarAreaCliente() {
   document.getElementById('modalCliente').style.display = 'none';
 }
 
+function mostrarFormulario(tipo) {
+  const formReg = document.getElementById('formRegistro');
+  const formLog = document.getElementById('formLogin');
+  formReg.style.display = tipo === 'registro' ? 'block' : 'none';
+  formLog.style.display = tipo === 'registro' ? 'none' : 'block';
+}
+
+function validarRegistro() {
+  const nombre = document.getElementById('nombreRegistro').value.trim();
+  const email = document.getElementById('emailRegistro').value.trim();
+  const password = document.getElementById('passwordRegistro').value.trim();
+
+  if (!nombre || !email || !password) return alert("Rellena todos los campos.");
+
+  const patronEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!patronEmail.test(email)) return alert("Correo inválido.");
+  if (password.length < 7) return alert("Contraseña muy corta.");
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(() => {
+      alert("¡Registro exitoso!");
+      cerrarAreaCliente();
+    })
+    .catch(error => alert("Error al registrar: " + error.message));
+}
+
+function validarLogin() {
+  const email = document.getElementById('emailLogin').value.trim();
+  const password = document.getElementById('passwordLogin').value.trim();
+
+  if (!email || !password) return alert("Rellena ambos campos.");
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then((cred) => {
+      alert("Bienvenido de nuevo, " + cred.user.email);
+      cerrarAreaCliente();
+    })
+    .catch(error => alert("Error al iniciar sesión: " + error.message));
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const stripe = Stripe('pk_test_51RJp4zRrXcu8ntoPCkZ9LMiFxF8JVTHyR563ihk5DrDmwPZ36aYAaPSDB905dMg55g9kPB0qBaDFUyp7KBpEGA3Z00sT4rgLOn');
 
