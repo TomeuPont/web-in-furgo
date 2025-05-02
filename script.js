@@ -144,6 +144,16 @@ function validarLogin() {
     .then((cred) => {
       alert("Bienvenido de nuevo, " + cred.user.email);
       cerrarAreaCliente();
+      auth.signInWithEmailAndPassword(email, password)
+  .then((cred) => {
+    const user = cred.user;
+    alert("¡Bienvenido de nuevo, " + user.email + " 👋");
+    cerrarAreaCliente();
+    mostrarUsuarioLogueado(user.email); // 👈 esta línea es clave
+  })
+  .catch((error) => {
+    alert("Error al iniciar sesión: " + error.message);
+  });
     })
     .catch(error => alert("Error al iniciar sesión: " + error.message));
 }
