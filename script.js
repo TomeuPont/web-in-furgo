@@ -4,7 +4,6 @@
 let precioBase = 0;
 let carrito = [];
 
-// Mostrar el modal con detalles del producto
 function mostrarDetalles(nombreProducto, precio) {
   const modal = document.getElementById('modal');
   const titulo = document.getElementById('tituloProducto');
@@ -101,24 +100,16 @@ function eliminarDelCarrito(index) {
   actualizarCarrito();
 }
 
-// Cargar Stripe solo una vez
-const stripe = Stripe('pk_test_51RJp4zRrXcu8ntoPCkZ9LMiFxF8JVTHyR563ihk5DrDmwPZ36aYAaPSDB905dMg55g9kPB0qBaDFUyp7KBpEGA3Z00sT4rgLOn');
+function abrirAreaCliente() {
+  document.getElementById('modalCliente').style.display = 'flex';
+}
 
-function pagarConStripe() {
-  fetch("https://us-central1-infurgo-web.cloudfunctions.net/crearCheckout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ carrito })
-  })
-  .then(res => res.json())
-  .then(data => stripe.redirectToCheckout({ sessionId: data.id }))
-  .catch(error => alert("Error al iniciar el pago: " + error.message));
+function cerrarAreaCliente() {
+  document.getElementById('modalCliente').style.display = 'none';
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const stripe = Stripe('pk_test_TU_CLAVE_PUBLICA');
+  const stripe = Stripe('pk_test_51RJp4zRrXcu8ntoPCkZ9LMiFxF8JVTHyR563ihk5DrDmwPZ36aYAaPSDB905dMg55g9kPB0qBaDFUyp7KBpEGA3Z00sT4rgLOn');
 
   window.pagarConStripe = function () {
     fetch("https://us-central1-infurgo-web.cloudfunctions.net/crearCheckout", {
@@ -129,11 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
       body: JSON.stringify({ carrito })
     })
     .then(res => res.json())
-    .then(data => {
-      return stripe.redirectToCheckout({ sessionId: data.id });
-    })
-    .catch(error => {
-      alert("Error al iniciar el pago: " + error.message);
-    });
+    .then(data => stripe.redirectToCheckout({ sessionId: data.id }))
+    .catch(error => alert("Error al iniciar el pago: " + error.message));
   };
 });
